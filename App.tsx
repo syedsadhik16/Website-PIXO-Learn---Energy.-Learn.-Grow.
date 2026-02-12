@@ -11,6 +11,7 @@ import Programs from './pages/Programs';
 import Mascot from './pages/Mascot';
 import Parents from './pages/Parents';
 import Support from './pages/Support';
+import { LanguageProvider } from './translations';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -22,23 +23,25 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow pt-20">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/philosophy" element={<Philosophy />} />
-            <Route path="/programs" element={<Programs />} />
-            <Route path="/mascot" element={<Mascot />} />
-            <Route path="/parents" element={<Parents />} />
-            <Route path="/support" element={<Support />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </HashRouter>
+    <LanguageProvider>
+      <HashRouter>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow pt-20">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/philosophy" element={<Philosophy />} />
+              <Route path="/programs" element={<Programs />} />
+              <Route path="/mascot" element={<Mascot />} />
+              <Route path="/parents" element={<Parents />} />
+              <Route path="/support" element={<Support />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </HashRouter>
+    </LanguageProvider>
   );
 };
 

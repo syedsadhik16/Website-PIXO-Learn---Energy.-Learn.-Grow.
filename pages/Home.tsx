@@ -7,6 +7,7 @@ import { ArrowRight, Star, ShieldCheck, Heart, Zap } from 'lucide-react';
 import * as ReactRouterDOM from 'react-router-dom';
 const { Link } = ReactRouterDOM as any;
 import PixelMascot from '../components/PixelMascot';
+import { useLanguage } from '../translations';
 
 // Helper component for floating background elements
 const FloatingBlob = ({ color, size, duration, delay, xRange, yRange, initialX, initialY }: any) => (
@@ -29,6 +30,8 @@ const FloatingBlob = ({ color, size, duration, delay, xRange, yRange, initialX, 
 );
 
 const Home: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="relative overflow-hidden">
       {/* Cinematic Background Blobs (Global for the page) */}
@@ -71,9 +74,9 @@ const Home: React.FC = () => {
               </div>
               
               <h1 className="text-7xl md:text-9xl font-black text-slate-900 leading-[0.9] mb-8 font-kids tracking-tighter">
-                Energy. Learn. <br />
+                {t('hero.title1')} <br />
                 <span className="text-emerald-500 relative">
-                  Grow.
+                  {t('hero.title2')}
                   <m.svg 
                     className="absolute -bottom-2 left-0 w-full" 
                     viewBox="0 0 400 20" 
@@ -87,16 +90,16 @@ const Home: React.FC = () => {
               </h1>
               
               <p className="text-2xl text-slate-500 mb-12 max-w-2xl leading-relaxed font-light">
-                Not marks. A child who speaks without fear. We turn learning into <span className="text-slate-900 font-bold">pure joy</span> through interactive 3D adventures with <span className="text-blue-600 font-bold">Pixel.</span>
+                {t('hero.subtitle')}
               </p>
               
               <div className="flex flex-col sm:flex-row items-center gap-6">
                 <button className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white px-12 py-6 rounded-[2rem] font-bold text-xl shadow-2xl shadow-slate-300 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 group">
-                  Start The Journey
+                  {t('hero.cta')}
                   <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                 </button>
                 <Link to="/philosophy" className="w-full sm:w-auto text-center px-12 py-6 rounded-[2rem] font-bold text-xl text-slate-600 border-2 border-slate-100 bg-white/50 backdrop-blur hover:bg-white transition-all shadow-sm">
-                  The Vision
+                  {t('hero.vision')}
                 </Link>
               </div>
 
@@ -113,7 +116,7 @@ const Home: React.FC = () => {
                 </div>
                 <div className="text-slate-400 text-sm font-bold uppercase tracking-widest flex items-center gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                  India's Trusted Mascot
+                  {t('hero.trusted')}
                 </div>
               </div>
             </m.div>
@@ -171,15 +174,15 @@ const Home: React.FC = () => {
       <section className="py-32 bg-slate-50/50 backdrop-blur-sm relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-5xl font-black mb-6 font-kids">The Official PIXO Method</h2>
-            <p className="text-xl text-slate-500">Built with the world's most friendly digital companion.</p>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 font-kids">{t('philosophy.title')}</h2>
+            <p className="text-xl text-slate-500">{t('philosophy.subtitle')}</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-10">
             {[
-              { color: 'rose', title: 'Energy', icon: <Zap />, desc: 'Channelling play into purpose.' },
-              { color: 'amber', title: 'Learn', icon: <Star />, desc: 'Discovery through dialogue.' },
-              { color: 'emerald', title: 'Grow', icon: <ShieldCheck />, desc: 'Visible, fearless transformation.' }
+              { color: 'rose', title: t('philosophy.energy'), icon: <Zap />, desc: t('philosophy.energyDesc') },
+              { color: 'amber', title: t('philosophy.learn'), icon: <Star />, desc: t('philosophy.learnDesc') },
+              { color: 'emerald', title: t('philosophy.grow'), icon: <ShieldCheck />, desc: t('philosophy.growDesc') }
             ].map((item, i) => (
               <m.div
                 key={i}
