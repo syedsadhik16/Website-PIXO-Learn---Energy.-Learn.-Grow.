@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 // Fix: Use type casting for react-router-dom and framer-motion to bypass property/export errors
 import * as ReactRouterDOM from 'react-router-dom';
 const { Link, useLocation } = ReactRouterDOM as any;
 import { motion, AnimatePresence } from 'framer-motion';
 const m = motion as any;
-import { Menu, X, Globe, ChevronDown, Check, Zap, ArrowRight } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, Check, Zap, ArrowRight, Sparkles } from 'lucide-react';
 import { useLanguage, LanguageCode } from '../translations';
 
 const languages: { code: LanguageCode; name: string; native: string }[] = [
@@ -66,11 +65,25 @@ const Navbar: React.FC = () => {
                 <span className="relative z-10 text-white font-black text-2xl">P</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-black tracking-tighter leading-none flex">
+                <span className="text-2xl font-black tracking-tighter leading-none flex items-center">
                   <span className="text-rose-500">P</span>
                   <span className="text-orange-500">I</span>
                   <span className="text-amber-500">X</span>
                   <span className="text-emerald-500">O</span>
+                  <m.span
+                    animate={{ 
+                      rotate: [0, 15, -15, 0],
+                      scale: [1, 1.2, 1]
+                    }}
+                    transition={{ 
+                      duration: 4, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    className="ml-1 text-amber-400 opacity-80 group-hover:opacity-100 group-hover:text-amber-500 transition-all"
+                  >
+                    <Sparkles size={16} fill="currentColor" />
+                  </m.span>
                 </span>
                 <span className="text-[9px] font-black text-slate-400 tracking-[0.1em] uppercase -mt-0.5">Energy. Learn. Grow.</span>
               </div>
@@ -270,7 +283,7 @@ const Navbar: React.FC = () => {
 
                 <form className="space-y-4" onSubmit={(e: any) => {
                   e.preventDefault();
-                  alert("Thank you for joining! Pixel is getting your desk ready.");
+                  alert("Thank you for joining! PIXO is getting your desk ready.");
                   setIsJoinModalOpen(false);
                 }}>
                   <div>

@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 // Fix: Use any-casting for motion to bypass property type errors
 const m = motion as any;
 import { Target, Eye, Users, Heart, Zap, ShieldCheck } from 'lucide-react';
-import PixelMascot from '../components/PixelMascot';
+import PIXOMascot from '../components/PIXOMascot';
 import { useLanguage } from '../translations';
 
 const About: React.FC = () => {
@@ -41,7 +40,7 @@ const About: React.FC = () => {
             >
               <div className="inline-flex items-center gap-3 bg-blue-50 text-blue-600 px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase mb-8">
                 <Users size={16} fill="currentColor" className="opacity-50" />
-                The Team Behind Pixel
+                The Team Behind PIXO
               </div>
               <h1 className="text-6xl md:text-8xl font-black mb-8 font-kids tracking-tighter text-slate-900 leading-[0.9]">
                 {t('about.hero.title')}
@@ -58,7 +57,7 @@ const About: React.FC = () => {
               transition={{ duration: 1.2, ease: "easeOut" }}
             >
               <div className="relative z-20">
-                <PixelMascot size="lg" pose="thinking" />
+                <PIXOMascot size="lg" pose="thinking" />
               </div>
               {/* Background Blobs */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] -z-10 bg-blue-100/30 blur-[100px] rounded-full animate-pulse" />

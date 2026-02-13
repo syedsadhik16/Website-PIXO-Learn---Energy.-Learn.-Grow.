@@ -2,13 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 // Fix: Use any-casting for motion to resolve property errors
 const m = motion as any;
-import PixelMascot from '../components/PixelMascot';
+import PIXOMascot from '../components/PIXOMascot';
 import { useLanguage } from '../translations';
 
 const Mascot: React.FC = () => {
   const { t } = useLanguage();
 
-  const pixelVersions = [
+  const pixoVersions = [
     { title: t('mascot.v1.title'), description: t('mascot.v1.desc'), pose: 'hero' as const },
     { title: t('mascot.v2.title'), description: t('mascot.v2.desc'), pose: 'thinking' as const },
     { title: t('mascot.v3.title'), description: t('mascot.v3.desc'), pose: 'learning' as const },
@@ -38,13 +38,13 @@ const Mascot: React.FC = () => {
             className="relative"
           >
              <div className="absolute inset-0 bg-gradient-to-tr from-rose-500 to-amber-400 blur-[100px] opacity-20 -z-10" />
-             <PixelMascot size="lg" pose="hero" />
+             <PIXOMascot size="lg" pose="hero" />
           </m.div>
         </div>
 
-        <h2 className="text-3xl font-bold text-center mb-16 uppercase tracking-widest text-slate-400">The Pixel Universe</h2>
+        <h2 className="text-3xl font-bold text-center mb-16 uppercase tracking-widest text-slate-400">The PIXO Universe</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {pixelVersions.map((v, i) => (
+          {pixoVersions.map((v, i) => (
             <m.div
               key={i}
               initial={{ opacity: 0, y: 50 }}
@@ -54,7 +54,7 @@ const Mascot: React.FC = () => {
               className="text-center group"
             >
               <div className="flex justify-center mb-6">
-                 <PixelMascot size="md" pose={v.pose} />
+                 <PIXOMascot size="md" pose={v.pose} />
               </div>
               <h3 className="text-xl font-bold mb-2">{v.title}</h3>
               <p className="text-slate-500 text-sm px-4">{v.description}</p>

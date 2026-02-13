@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 // Fix: Use any-casting for both libraries to resolve property errors
@@ -6,7 +5,7 @@ const m = motion as any;
 import { ArrowRight, Star, ShieldCheck, Heart, Zap } from 'lucide-react';
 import * as ReactRouterDOM from 'react-router-dom';
 const { Link } = ReactRouterDOM as any;
-import PixelMascot from '../components/PixelMascot';
+import PIXOMascot from '../components/PIXOMascot';
 import { useLanguage } from '../translations';
 
 // Helper component for floating background elements
@@ -129,7 +128,7 @@ const Home: React.FC = () => {
             >
               {/* Premium Mascot Illustration (Official Reference Style) */}
               <div className="relative z-20 flex justify-center items-center py-20">
-                <PixelMascot size="xl" pose="learning" />
+                <PIXOMascot size="xl" pose="learning" />
                 
                 {/* Floating Micro-UI elements */}
                 <m.div 
