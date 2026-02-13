@@ -1,30 +1,32 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 // Fix: Use any-casting for motion to bypass property type errors
 const m = motion as any;
 import { ShieldCheck, Eye, Headphones, BarChart, Star } from 'lucide-react';
+import { useLanguage } from '../translations';
 
 const Parents: React.FC = () => {
+  const { t } = useLanguage();
+
   const trustPoints = [
     {
-      title: '100% Child-Safe',
-      text: 'Verified content, no ads, no external chat. A walled garden for your child\'s voice.',
+      title: t('parents.safe.title'),
+      text: t('parents.safe.desc'),
       icon: <ShieldCheck className="text-emerald-500" />
     },
     {
-      title: 'Built for India',
-      text: 'Our AI understands local accents, Indian cultural nuances, and common mother-tongue influences.',
+      title: t('parents.india.title'),
+      text: t('parents.india.desc'),
       icon: <Eye className="text-rose-500" />
     },
     {
-      title: 'Progress, Not Stress',
-      text: 'Ditch the grading system. We provide emotional progress reports that show how confidence is rising.',
+      title: t('parents.stress.title'),
+      text: t('parents.stress.desc'),
       icon: <BarChart className="text-amber-500" />
     },
     {
-      title: 'Parent Support Hub',
-      text: 'Direct line to our experts if you need guidance on your child\'s development path.',
+      title: t('parents.hub.title'),
+      text: t('parents.hub.desc'),
       icon: <Headphones className="text-blue-500" />
     }
   ];
@@ -45,10 +47,8 @@ const Parents: React.FC = () => {
                 <ShieldCheck size={16} fill="currentColor" className="opacity-50" />
                 Safety First Protocol
               </div>
-              <h1 className="text-5xl md:text-7xl font-black mb-10 leading-[1] text-slate-900 font-kids tracking-tighter">
-                Your Child's <br />
-                <span className="text-emerald-500">Security</span> is <br />
-                Our Promise.
+              <h1 className="text-5xl md:text-7xl font-black mb-10 leading-[1.1] text-slate-900 font-kids tracking-tighter">
+                {t('parents.hero')}
               </h1>
               
               <div className="grid sm:grid-cols-2 gap-10">
@@ -71,7 +71,7 @@ const Parents: React.FC = () => {
               </div>
             </m.div>
 
-            {/* Right Column: Premium High-Fidelity Testimonial (Matching Image) */}
+            {/* Right Column: Testimonial Visual */}
             <div className="flex-1 order-1 lg:order-2 w-full flex justify-center">
               <m.div 
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -80,7 +80,6 @@ const Parents: React.FC = () => {
                 transition={{ duration: 1, ease: "circOut" }}
                 className="relative group w-full max-w-[550px]"
               >
-                {/* Visual Pillar: Large Rounded Image */}
                 <div className="relative aspect-[4/5] rounded-[5rem] overflow-hidden shadow-[0_80px_100px_-30px_rgba(0,0,0,0.2)] bg-slate-200">
                   <img 
                     src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop" 
@@ -90,7 +89,6 @@ const Parents: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                 </div>
 
-                {/* The "Image Reference" inspired Glassmorphism Testimonial Box */}
                 <m.div 
                   initial={{ x: -20, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
@@ -102,7 +100,7 @@ const Parents: React.FC = () => {
                   </div>
                   
                   <blockquote className="text-slate-800 text-xl font-medium leading-relaxed italic mb-8">
-                    "Finally, an app where I don't have to worry about what my child is seeing. <span className="font-black text-slate-900">Truly safe.</span>"
+                    "{t('parents.quote')}"
                   </blockquote>
                   
                   <div className="flex items-center gap-4">
@@ -116,9 +114,7 @@ const Parents: React.FC = () => {
                   </div>
                 </m.div>
 
-                {/* Decorative Elements */}
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-400/20 blur-[60px] rounded-full animate-pulse" />
-                <div className="absolute top-1/2 -right-20 w-32 h-32 bg-rose-400/10 blur-[50px] rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
               </m.div>
             </div>
           </div>

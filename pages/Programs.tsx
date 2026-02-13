@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 // Fix: Bypass property check errors by casting motion
@@ -13,6 +12,7 @@ import {
   Play, 
   X 
 } from 'lucide-react';
+import { useLanguage } from '../translations';
 
 export interface ProgramCard {
   title: string;
@@ -23,78 +23,71 @@ export interface ProgramCard {
   video?: string;
 }
 
-export const programs: ProgramCard[] = [
-  {
-    title: 'Communication',
-    outcome: 'Mastering the art of expression. Your child will learn to articulate thoughts, share stories, and listen with empathy.',
-    icon: <MessageCircle className="text-blue-500" />,
-    color: 'blue',
-    image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_1',
-    video: 'https://drive.google.com/file/d/1J8dEp1DOJrstmGFD8EHtdZ1KbD35d17l/view?usp=drive_link'
-  },
-  {
-    title: 'Personality & Confidence',
-    outcome: 'Building inner strength and public presence. Through role-play and social challenges, we nurture self-assured leaders.',
-    icon: <Smile className="text-rose-500" />,
-    color: 'rose',
-    image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_2',
-    video: 'https://drive.google.com/uc?export=view&id=DRIVE_VIDEO_FILE_ID_2'
-  },
-  {
-    title: 'Reading & Phonics',
-    outcome: 'Decoding the magic of language. A phonics-first approach that turns every word into a discovery and every book into a friend.',
-    icon: <BookOpen className="text-amber-500" />,
-    color: 'amber',
-    image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_3',
-    video: 'https://drive.google.com/uc?export=view&id=DRIVE_VIDEO_FILE_ID_3'
-  },
-  {
-    title: 'Logical Thinking',
-    outcome: 'Puzzles, patterns, and problem-solving. We stimulate cognitive growth through algorithmic thinking and spatial reasoning.',
-    icon: <Brain className="text-emerald-500" />,
-    color: 'emerald',
-    image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_4',
-    video: 'https://drive.google.com/uc?export=view&id=DRIVE_VIDEO_FILE_ID_4'
-  },
-  {
-    title: 'Creativity',
-    outcome: 'Imagination without limits. From visual arts to creative writing, we encourage children to think outside the box.',
-    icon: <Palette className="text-purple-500" />,
-    color: 'purple',
-    image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_5',
-    video: 'https://drive.google.com/uc?export=view&id=DRIVE_VIDEO_FILE_ID_5'
-  },
-  {
-    title: 'Emotional Intelligence',
-    outcome: 'Understanding self and others. Nurturing empathy, resilience, and emotional regulation for a balanced life.',
-    icon: <Heart className="text-pink-500" />,
-    color: 'pink',
-    image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_6',
-    video: 'https://drive.google.com/uc?export=view&id=DRIVE_VIDEO_FILE_ID_6'
-  }
-];
-
 const Programs: React.FC = () => {
+  const { t } = useLanguage();
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+
+  const programList: ProgramCard[] = [
+    {
+      title: t('prog.comm.title'),
+      outcome: t('prog.comm.desc'),
+      icon: <MessageCircle className="text-blue-500" />,
+      color: 'blue',
+      image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_1',
+      video: 'https://drive.google.com/file/d/1J8dEp1DOJrstmGFD8EHtdZ1KbD35d17l/view?usp=drive_link'
+    },
+    {
+      title: t('prog.conf.title'),
+      outcome: t('prog.conf.desc'),
+      icon: <Smile className="text-rose-500" />,
+      color: 'rose',
+      image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_2',
+      video: 'https://drive.google.com/uc?export=view&id=DRIVE_VIDEO_FILE_ID_2'
+    },
+    {
+      title: t('prog.read.title'),
+      outcome: t('prog.read.desc'),
+      icon: <BookOpen className="text-amber-500" />,
+      color: 'amber',
+      image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_3',
+      video: 'https://drive.google.com/uc?export=view&id=DRIVE_VIDEO_FILE_ID_3'
+    },
+    {
+      title: t('prog.logic.title'),
+      outcome: t('prog.logic.desc'),
+      icon: <Brain className="text-emerald-500" />,
+      color: 'emerald',
+      image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_4',
+      video: 'https://drive.google.com/uc?export=view&id=DRIVE_VIDEO_FILE_ID_4'
+    },
+    {
+      title: t('prog.crea.title'),
+      outcome: t('prog.crea.desc'),
+      icon: <Palette className="text-purple-500" />,
+      color: 'purple',
+      image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_5',
+      video: 'https://drive.google.com/uc?export=view&id=DRIVE_VIDEO_FILE_ID_5'
+    },
+    {
+      title: t('prog.eq.title'),
+      outcome: t('prog.eq.desc'),
+      icon: <Heart className="text-pink-500" />,
+      color: 'pink',
+      image: 'https://drive.google.com/uc?export=view&id=DRIVE_IMAGE_FILE_ID_6',
+      video: 'https://drive.google.com/uc?export=view&id=DRIVE_VIDEO_FILE_ID_6'
+    }
+  ];
 
   const getEmbedUrl = (url: string) => {
     try {
-      // Basic validation: if not a string or doesn't look like a URL, return as is
       if (!url || typeof url !== 'string' || !url.startsWith('http')) return url;
-
       if (url.includes('drive.google.com')) {
         const urlObj = new URL(url);
-        // Try getting ID from search params first (uc?id=...)
         let id = urlObj.searchParams.get('id');
-        
-        // If not found, try extracting from the path (/file/d/ID/view)
         if (!id) {
           const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-          if (match && match[1]) {
-            id = match[1];
-          }
+          if (match && match[1]) id = match[1];
         }
-        
         if (id) return `https://drive.google.com/file/d/${id}/preview`;
       }
     } catch (e) {
@@ -107,14 +100,27 @@ const Programs: React.FC = () => {
     <div className="py-20 bg-slate-50 min-h-screen">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <h1 className="text-5xl font-black mb-6 font-kids">Focus on Outcomes.</h1>
-          <p className="text-lg text-slate-500">
-            We don't teach curriculum. We nurture transformations. See how your child evolves across our primary focus areas.
-          </p>
+          <m.h1 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl font-black mb-6 font-kids"
+          >
+            {t('prog.title')}
+          </m.h1>
+          <m.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-slate-500"
+          >
+            {t('prog.desc')}
+          </m.p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {programs.map((program, index) => (
+          {programList.map((program, index) => (
             <m.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -130,9 +136,6 @@ const Programs: React.FC = () => {
                   src={program.image} 
                   alt={program.title} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 relative z-10"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
                 />
                 
                 {program.video && (
@@ -154,9 +157,6 @@ const Programs: React.FC = () => {
               <div className="px-4 pb-4 flex-grow">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-2xl font-bold text-slate-900">{program.title}</h3>
-                  {program.video && (
-                    <span className="text-[10px] font-black uppercase tracking-widest text-blue-500 bg-blue-50 px-2 py-1 rounded-md">Demo Video</span>
-                  )}
                 </div>
                 <p className="text-slate-600 text-sm leading-relaxed">{program.outcome}</p>
               </div>

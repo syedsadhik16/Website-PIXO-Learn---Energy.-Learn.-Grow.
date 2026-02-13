@@ -1,12 +1,14 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 // Fix: cast motion to any to resolve property type mismatch errors
 const m = motion as any;
 import { Mail, MessageCircle, Phone, Send } from 'lucide-react';
 import PixelMascot from '../components/PixelMascot';
+import { useLanguage } from '../translations';
 
 const Support: React.FC = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="py-20 bg-slate-50 min-h-screen">
       <div className="container mx-auto px-6">
@@ -17,8 +19,13 @@ const Support: React.FC = () => {
             viewport={{ once: true }}
             className="flex flex-col justify-center"
           >
-            <h1 className="text-5xl font-black mb-8 leading-tight">We're Here <br /><span className="text-emerald-500">For You.</span></h1>
-            <p className="text-lg text-slate-600 mb-12">Questions about your child's path? Technical help? We're just a message away.</p>
+            <h1 className="text-5xl font-black mb-8 leading-tight">
+              {t('support.title').split(' ')[0]} <br />
+              <span className="text-emerald-500">{t('support.title').split(' ').slice(1).join(' ')}</span>
+            </h1>
+            <p className="text-lg text-slate-600 mb-12">
+              {t('support.subtitle')}
+            </p>
             
             <div className="space-y-6">
               <div className="flex items-center gap-6 p-6 bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
@@ -55,19 +62,19 @@ const Support: React.FC = () => {
             <h3 className="text-2xl font-bold mb-8">Send a Message</h3>
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div>
-                <label className="block text-sm font-bold text-slate-700 mb-2">Your Name</label>
-                <input type="text" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all" placeholder="John Doe" />
+                <label className="block text-sm font-bold text-slate-700 mb-2">{t('support.form.name')}</label>
+                <input type="text" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all font-medium" />
               </div>
               <div>
-                <label className="block text-sm font-bold text-slate-700 mb-2">Email Address</label>
-                <input type="email" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all" placeholder="john@example.com" />
+                <label className="block text-sm font-bold text-slate-700 mb-2">{t('support.form.email')}</label>
+                <input type="email" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all font-medium" />
               </div>
               <div>
-                <label className="block text-sm font-bold text-slate-700 mb-2">Message</label>
-                <textarea rows={4} className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all" placeholder="How can we help you and your child?"></textarea>
+                <label className="block text-sm font-bold text-slate-700 mb-2">{t('support.form.msg')}</label>
+                <textarea rows={4} className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all font-medium"></textarea>
               </div>
               <button className="w-full bg-emerald-500 text-white py-5 rounded-2xl font-bold text-lg shadow-xl shadow-emerald-200 flex items-center justify-center gap-3 hover:bg-emerald-600 transition-all">
-                Send Message <Send size={20} />
+                {t('support.form.cta')} <Send size={20} />
               </button>
             </form>
           </m.div>

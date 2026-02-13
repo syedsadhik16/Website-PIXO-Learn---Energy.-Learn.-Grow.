@@ -3,8 +3,10 @@ import React from 'react';
 // Fix: Use type casting to resolve react-router-dom Link export error
 import * as ReactRouterDOM from 'react-router-dom';
 const { Link } = ReactRouterDOM as any;
+import { useLanguage } from '../translations';
 
 const Footer: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <footer className="bg-slate-50 pt-20 pb-10 border-t border-slate-100">
       <div className="container mx-auto px-6">
@@ -32,17 +34,18 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">Platform</h4>
             <ul className="space-y-4 text-slate-500 font-medium">
-              <li><Link to="/philosophy" className="hover:text-rose-500 transition-colors">Philosophy</Link></li>
-              <li><Link to="/programs" className="hover:text-rose-500 transition-colors">Programs</Link></li>
-              <li><Link to="/mascot" className="hover:text-rose-500 transition-colors">Pixel World</Link></li>
-              <li><Link to="/parents" className="hover:text-rose-500 transition-colors">Parents Hub</Link></li>
+              <li><Link to="/philosophy" className="hover:text-rose-500 transition-colors">{t('nav.philosophy')}</Link></li>
+              <li><Link to="/programs" className="hover:text-rose-500 transition-colors">{t('nav.programs')}</Link></li>
+              <li><Link to="/about" className="hover:text-rose-500 transition-colors">{t('nav.about')}</Link></li>
+              <li><Link to="/mascot" className="hover:text-rose-500 transition-colors">{t('nav.mascot')}</Link></li>
+              <li><Link to="/parents" className="hover:text-rose-500 transition-colors">{t('nav.parents')}</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">Connect</h4>
             <ul className="space-y-4 text-slate-500 font-medium">
-              <li><Link to="/support" className="hover:text-emerald-500 transition-colors">Contact Support</Link></li>
+              <li><Link to="/support" className="hover:text-emerald-500 transition-colors">{t('nav.support')}</Link></li>
               <li><a href="#" className="hover:text-emerald-500 transition-colors">Instagram</a></li>
               <li><a href="#" className="hover:text-emerald-500 transition-colors">LinkedIn</a></li>
               <li><a href="#" className="hover:text-emerald-500 transition-colors">YouTube</a></li>

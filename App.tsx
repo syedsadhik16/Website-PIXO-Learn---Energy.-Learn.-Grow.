@@ -11,6 +11,7 @@ import Programs from './pages/Programs';
 import Mascot from './pages/Mascot';
 import Parents from './pages/Parents';
 import Support from './pages/Support';
+import About from './pages/About';
 import { LanguageProvider } from './translations';
 
 const ScrollToTop = () => {
@@ -36,6 +37,7 @@ const App: React.FC = () => {
               <Route path="/mascot" element={<Mascot />} />
               <Route path="/parents" element={<Parents />} />
               <Route path="/support" element={<Support />} />
+              <Route path="/about" element={<About />} />
             </Routes>
           </main>
           <Footer />
