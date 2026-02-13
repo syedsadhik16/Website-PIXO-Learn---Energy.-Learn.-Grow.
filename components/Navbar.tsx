@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 // Fix: Use type casting for react-router-dom and framer-motion to bypass property/export errors
 import * as ReactRouterDOM from 'react-router-dom';
-const { Link, useLocation } = ReactRouterDOM as any;
+const { Link, useLocation, useNavigate } = ReactRouterDOM as any;
 import { motion, AnimatePresence } from 'framer-motion';
 const m = motion as any;
 import { Menu, X, Globe, ChevronDown, Check, Zap, ArrowRight, Sparkles } from 'lucide-react';
@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+  const navigate = useNavigate();
   
   const currentLang = languages.find(l => l.code === language) || languages[0];
   const langRef = useRef<HTMLDivElement>(null);
@@ -33,7 +33,6 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (langRef.current && !langRef.current.contains(event.target as Node)) {
@@ -85,7 +84,9 @@ const Navbar: React.FC = () => {
                     <Sparkles size={16} fill="currentColor" />
                   </m.span>
                 </span>
-                <span className="text-[9px] font-black text-slate-400 tracking-[0.1em] uppercase -mt-0.5">Energy. Learn. Grow.</span>
+                <span className="text-[9px] font-black tracking-[0.1em] uppercase -mt-0.5">
+                  <span className="text-red-500">Energy.</span> <span className="text-yellow-500">Learn.</span> <span className="text-green-500">Grow.</span>
+                </span>
               </div>
             </Link>
 
@@ -155,8 +156,9 @@ const Navbar: React.FC = () => {
                 </AnimatePresence>
               </div>
 
+              {/* Primary Enrollment Button */}
               <m.button 
-                onClick={() => setIsJoinModalOpen(true)}
+                onClick={() => navigate('/enroll')}
                 whileHover={{ scale: 1.05, filter: "brightness(1.15)" }}
                 whileTap={{ scale: 0.98 }}
                 className="bg-emerald-500 text-white px-7 py-2.5 rounded-full font-black text-sm shadow-xl shadow-emerald-200/50 transition-all cursor-pointer"
@@ -222,92 +224,16 @@ const Navbar: React.FC = () => {
               <button 
                 onClick={() => {
                   setIsOpen(false);
-                  setIsJoinModalOpen(true);
+                  navigate('/enroll');
                 }}
                 className="w-full bg-emerald-500 text-white py-5 rounded-2xl font-black text-lg shadow-2xl shadow-emerald-200 mt-4"
               >
-                {t('hero.cta')}
+                Enroll Now
               </button>
             </m.div>
           )}
         </AnimatePresence>
       </nav>
-
-      {/* Join PIXO Modal with Video Background */}
-      <AnimatePresence>
-        {isJoinModalOpen && (
-          <m.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-12"
-          >
-            <div 
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-xl"
-              onClick={() => setIsJoinModalOpen(false)}
-            />
-            <m.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative w-full max-w-lg bg-white rounded-[3rem] shadow-2xl border border-white/50 overflow-hidden"
-            >
-              <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover scale-110 opacity-60 filter blur-sm"
-                >
-                  <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-animation-of-pixels-and-light-43400-large.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-white/70" />
-              </div>
-
-              <div className="relative z-10 p-10 md:p-14">
-                <button 
-                  onClick={() => setIsJoinModalOpen(false)}
-                  className="absolute top-8 right-8 p-2 text-slate-400 hover:text-slate-900 transition-colors"
-                >
-                  <X size={24} />
-                </button>
-
-                <div className="text-center mb-10">
-                  <div className="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-emerald-100">
-                    <Zap size={36} fill="currentColor" />
-                  </div>
-                  <h2 className="text-3xl font-black mb-3 font-kids">{t('modal.title')}</h2>
-                  <p className="text-slate-600 leading-relaxed font-medium">{t('modal.desc')}</p>
-                </div>
-
-                <form className="space-y-4" onSubmit={(e: any) => {
-                  e.preventDefault();
-                  alert("Thank you for joining! PIXO is getting your desk ready.");
-                  setIsJoinModalOpen(false);
-                }}>
-                  <div>
-                    <input 
-                      type="email" 
-                      required
-                      placeholder={t('modal.placeholder')}
-                      className="w-full px-8 py-5 rounded-2xl bg-white/60 backdrop-blur border border-slate-200 focus:outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all text-lg font-medium"
-                    />
-                  </div>
-                  <button className="w-full bg-slate-900 text-white py-5 rounded-2xl font-bold text-lg shadow-xl hover:bg-slate-800 transition-all flex items-center justify-center gap-3 group">
-                    {t('modal.cta')}
-                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </form>
-
-                <p className="text-center mt-8 text-[10px] uppercase font-black tracking-widest text-slate-400">
-                  Join 50k+ Happy Indian Parents
-                </p>
-              </div>
-            </m.div>
-          </m.div>
-        )}
-      </AnimatePresence>
     </>
   );
 };

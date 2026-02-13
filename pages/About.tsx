@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 const m = motion as any;
 import { Target, Eye, Users, Heart, Zap, ShieldCheck } from 'lucide-react';
 import PIXOMascot from '../components/PIXOMascot';
+import ActionButton from '../components/ActionButton';
 import { useLanguage } from '../translations';
 
 const About: React.FC = () => {
@@ -139,7 +140,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Final Section */}
+      {/* Final Section - DIRECT TO ENROLL */}
       <section className="py-32 relative overflow-hidden bg-slate-900 text-white">
         <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
           <div className="w-24 h-24 bg-white/10 backdrop-blur rounded-[2rem] flex items-center justify-center mb-12 shadow-2xl">
@@ -149,10 +150,8 @@ const About: React.FC = () => {
             We're on a mission to make <br />
             every Indian child <span className="text-blue-400">fearless.</span>
           </h2>
-          <button className="bg-white text-slate-900 px-14 py-6 rounded-[2rem] font-bold text-xl hover:bg-blue-50 transition-all shadow-2xl shadow-blue-500/20 flex items-center gap-4 group">
-            Join Our Mission
-            <Zap size={20} className="text-blue-500 group-hover:scale-125 transition-transform" fill="currentColor" />
-          </button>
+          
+          <ActionButton text="Join Our Mission" variant="secondary" to="/enroll" />
         </div>
         {/* Dynamic Orbs */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-blue-500/20 blur-[120px] rounded-full" />

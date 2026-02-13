@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 const m = motion as any;
 import { Mail, MessageCircle, Phone, Send } from 'lucide-react';
 import PIXOMascot from '../components/PIXOMascot';
+import ActionButton from '../components/ActionButton';
 import { useLanguage } from '../translations';
 
 const Support: React.FC = () => {
@@ -59,23 +60,26 @@ const Support: React.FC = () => {
             viewport={{ once: true }}
             className="bg-white rounded-[3rem] p-10 md:p-14 shadow-2xl border border-slate-100"
           >
-            <h3 className="text-2xl font-bold mb-8">Send a Message</h3>
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <h3 className="text-2xl font-bold mb-8 text-slate-900">Send a Message</h3>
+            <form className="space-y-6" onSubmit={(e) => {
+              e.preventDefault();
+              alert("Message received! PIXO is on it.");
+            }}>
               <div>
                 <label className="block text-sm font-bold text-slate-700 mb-2">{t('support.form.name')}</label>
-                <input type="text" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all font-medium" />
+                <input type="text" required className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all font-medium" />
               </div>
               <div>
                 <label className="block text-sm font-bold text-slate-700 mb-2">{t('support.form.email')}</label>
-                <input type="email" className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all font-medium" />
+                <input type="email" required className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all font-medium" />
               </div>
               <div>
                 <label className="block text-sm font-bold text-slate-700 mb-2">{t('support.form.msg')}</label>
-                <textarea rows={4} className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all font-medium"></textarea>
+                <textarea rows={4} required className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all font-medium"></textarea>
               </div>
-              <button className="w-full bg-emerald-500 text-white py-5 rounded-2xl font-bold text-lg shadow-xl shadow-emerald-200 flex items-center justify-center gap-3 hover:bg-emerald-600 transition-all">
-                {t('support.form.cta')} <Send size={20} />
-              </button>
+              <div className="flex justify-center">
+                <ActionButton text={t('support.form.cta')} type="submit" className="w-full" />
+              </div>
             </form>
           </m.div>
         </div>

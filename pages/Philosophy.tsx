@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 const m = motion as any;
 import { Zap, BookOpen, TrendingUp } from 'lucide-react';
 import PIXOMascot from '../components/PIXOMascot';
+import ActionButton from '../components/ActionButton';
 import { useLanguage } from '../translations';
 
 const Philosophy: React.FC = () => {
@@ -21,11 +22,11 @@ const Philosophy: React.FC = () => {
       tagline: t('philosophy.energyTag'),
       description: t('philosophy.energyDesc'),
       theme: {
-        primary: '#f43f5e', // rose-500
-        accent: 'text-rose-600',
-        bgGradient: generateDynamicGradient('#f43f5e'),
-        iconGradient: 'linear-gradient(135deg, #f43f5e 0%, #e11d48 100%)',
-        blobColor: 'rgba(244, 63, 94, 0.15)'
+        primary: '#ef4444', // red-500
+        accent: 'text-red-500',
+        bgGradient: generateDynamicGradient('#ef4444'),
+        iconGradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+        blobColor: 'rgba(239, 68, 68, 0.15)'
       },
       icon: <Zap size={32} />,
       pose: 'celebrating' as const
@@ -36,11 +37,11 @@ const Philosophy: React.FC = () => {
       tagline: t('philosophy.learnTag'),
       description: t('philosophy.learnDesc'),
       theme: {
-        primary: '#fbbf24', // amber-400
-        accent: 'text-amber-600',
-        bgGradient: generateDynamicGradient('#fbbf24'),
-        iconGradient: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
-        blobColor: 'rgba(251, 191, 36, 0.15)'
+        primary: '#eab308', // yellow-500
+        accent: 'text-yellow-500',
+        bgGradient: generateDynamicGradient('#eab308'),
+        iconGradient: 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)',
+        blobColor: 'rgba(234, 179, 8, 0.15)'
       },
       icon: <BookOpen size={32} />,
       pose: 'learning' as const
@@ -51,18 +52,17 @@ const Philosophy: React.FC = () => {
       tagline: t('philosophy.growTag'),
       description: t('philosophy.growDesc'),
       theme: {
-        primary: '#10b981', // emerald-500
-        accent: 'text-emerald-600',
-        bgGradient: generateDynamicGradient('#10b981'),
-        iconGradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-        blobColor: 'rgba(16, 185, 129, 0.15)'
+        primary: '#16a34a', // green-600
+        accent: 'text-green-600',
+        bgGradient: generateDynamicGradient('#16a34a'),
+        iconGradient: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)',
+        blobColor: 'rgba(22, 163, 74, 0.15)'
       },
       icon: <TrendingUp size={32} />,
       pose: 'thinking' as const
     }
   ];
 
-  // Subtle animation settings for icons and text
   const fadeUpVariant = {
     hidden: { opacity: 0, y: 15 },
     visible: (custom: number) => ({
@@ -88,7 +88,7 @@ const Philosophy: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans overflow-x-hidden">
-      {/* Premium Header */}
+      {/* Premium Header - BRAND UPDATE */}
       <section className="pt-24 pb-20 text-center container mx-auto px-6 relative overflow-hidden">
         <m.div
           initial="hidden"
@@ -97,8 +97,12 @@ const Philosophy: React.FC = () => {
           custom={0}
           className="relative z-10"
         >
-          <h1 className="text-6xl md:text-8xl font-black mb-8 font-kids tracking-tighter text-slate-900">
-            {t('hero.title1')} <span className="text-emerald-500">{t('hero.title2')}</span>
+          <h1 className="text-6xl md:text-8xl font-black mb-8 font-kids tracking-tighter leading-[1.1] flex flex-col items-center">
+            <div className="flex flex-wrap justify-center gap-x-4">
+              <span className="text-red-500">{t('hero.title.energy')}</span>
+              <span className="text-yellow-500">{t('hero.title.learn')}</span>
+            </div>
+            <span className="text-emerald-500">{t('hero.title.grow')}</span>
           </h1>
           <p className="text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto leading-relaxed font-light">
             {t('philosophy.subtitle')}
@@ -106,7 +110,7 @@ const Philosophy: React.FC = () => {
         </m.div>
         
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
-           <div className="absolute top-0 left-1/4 w-64 h-64 bg-rose-100 blur-[100px] rounded-full opacity-40 animate-pulse" />
+           <div className="absolute top-0 left-1/4 w-64 h-64 bg-red-100 blur-[100px] rounded-full opacity-40 animate-pulse" />
            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-emerald-100 blur-[100px] rounded-full opacity-40 animate-pulse" style={{ animationDelay: '2s' }} />
         </div>
       </section>
@@ -140,7 +144,7 @@ const Philosophy: React.FC = () => {
                   viewport={{ once: true, margin: "-50px" }}
                   variants={fadeUpVariant}
                   custom={1}
-                  className={`text-6xl md:text-8xl font-black mb-6 tracking-tighter ${section.theme.accent} font-kids`}
+                  className={`text-6xl md:text-8xl font-black mb-6 tracking-tighter ${section.theme.accent} font-kids uppercase`}
                 >
                   {section.title}
                 </m.h2>
@@ -219,8 +223,8 @@ const Philosophy: React.FC = () => {
         </section>
       ))}
 
-      {/* Engaging Final Footer CTA */}
-      <section className="py-40 text-center bg-slate-900 text-white relative overflow-hidden">
+      {/* Engaging Final Footer CTA - REDIRECT TO ENROLL */}
+      <section className="py-40 text-center bg-[#050b1a] text-white relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <m.div
             initial="hidden"
@@ -228,7 +232,7 @@ const Philosophy: React.FC = () => {
             variants={fadeUpVariant}
             custom={0}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
+            className="max-w-4xl mx-auto flex flex-col items-center"
           >
             <h2 className="text-5xl md:text-7xl font-black mb-10 font-kids leading-tight">
               {t('phil.footer.title')} <br />
@@ -237,31 +241,29 @@ const Philosophy: React.FC = () => {
             <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
               {t('phil.footer.desc')}
             </p>
-            <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-14 py-6 rounded-[2rem] font-bold text-2xl shadow-2xl shadow-emerald-900/50 transition-all transform hover:-translate-y-2 active:scale-95 flex items-center gap-4 mx-auto">
-              {t('phil.footer.cta')}
-              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                 <Zap size={18} fill="white" />
-              </div>
-            </button>
+            
+            <ActionButton text={t('phil.footer.cta')} to="/enroll" />
           </m.div>
         </div>
         
+        {/* Electric Particles in Background */}
         <div className="absolute inset-0 pointer-events-none opacity-20">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(30)].map((_, i) => (
             <m.div
               key={i}
-              className="absolute w-1.5 h-1.5 bg-white rounded-full"
+              className="absolute w-1.5 h-1.5 bg-emerald-400 rounded-full"
               initial={{ 
                 x: Math.random() * 100 + '%', 
                 y: Math.random() * 100 + '%',
                 opacity: 0 
               }}
               animate={{ 
-                y: ['10%', '-10%'],
-                opacity: [0, 0.8, 0]
+                y: ['20%', '-20%'],
+                opacity: [0, 0.8, 0],
+                scale: [0, 1.5, 0]
               }}
               transition={{ 
-                duration: Math.random() * 8 + 4, 
+                duration: Math.random() * 4 + 2, 
                 repeat: Infinity, 
                 ease: "linear",
                 delay: Math.random() * 5

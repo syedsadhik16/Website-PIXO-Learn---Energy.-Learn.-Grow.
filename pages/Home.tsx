@@ -4,8 +4,9 @@ import { motion } from 'framer-motion';
 const m = motion as any;
 import { ArrowRight, Star, ShieldCheck, Heart, Zap } from 'lucide-react';
 import * as ReactRouterDOM from 'react-router-dom';
-const { Link } = ReactRouterDOM as any;
+const { Link, useNavigate } = ReactRouterDOM as any;
 import PIXOMascot from '../components/PIXOMascot';
+import ActionButton from '../components/ActionButton';
 import { useLanguage } from '../translations';
 
 // Helper component for floating background elements
@@ -30,6 +31,7 @@ const FloatingBlob = ({ color, size, duration, delay, xRange, yRange, initialX, 
 
 const Home: React.FC = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   return (
     <div className="relative overflow-hidden">
@@ -57,7 +59,7 @@ const Home: React.FC = () => {
         />
       </div>
 
-      {/* Cinematic Hero Section */}
+      {/* Cinematic Hero Section - Headline Color/Layout Update */}
       <section className="relative min-h-[95vh] flex items-center pt-20 pb-32">
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -72,18 +74,19 @@ const Home: React.FC = () => {
                 Official Mascot v2.0
               </div>
               
-              <h1 className="text-7xl md:text-9xl font-black text-slate-900 leading-[0.9] mb-8 font-kids tracking-tighter">
-                {t('hero.title1')} <br />
-                <span className="text-emerald-500 relative">
-                  {t('hero.title2')}
+              <h1 className="text-7xl md:text-[10rem] font-black leading-[0.85] mb-8 font-kids tracking-tighter flex flex-col">
+                <span className="text-red-500 drop-shadow-sm">{t('hero.title.energy')}</span>
+                <span className="text-yellow-500 drop-shadow-sm">{t('hero.title.learn')}</span>
+                <span className="text-emerald-500 relative inline-block">
+                  {t('hero.title.grow')}
                   <m.svg 
-                    className="absolute -bottom-2 left-0 w-full" 
+                    className="absolute -bottom-4 left-0 w-full max-w-[300px]" 
                     viewBox="0 0 400 20" 
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
                     transition={{ duration: 1, delay: 1 }}
                   >
-                    <path d="M5 15 Q 100 5 395 15" stroke="#10b981" strokeWidth="6" fill="none" strokeLinecap="round" />
+                    <path d="M5 15 Q 100 5 395 15" stroke="#10b981" strokeWidth="8" fill="none" strokeLinecap="round" />
                   </m.svg>
                 </span>
               </h1>
@@ -93,11 +96,8 @@ const Home: React.FC = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center gap-6">
-                <button className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white px-12 py-6 rounded-[2rem] font-bold text-xl shadow-2xl shadow-slate-300 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 group">
-                  {t('hero.cta')}
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </button>
-                <Link to="/philosophy" className="w-full sm:w-auto text-center px-12 py-6 rounded-[2rem] font-bold text-xl text-slate-600 border-2 border-slate-100 bg-white/50 backdrop-blur hover:bg-white transition-all shadow-sm">
+                <ActionButton text={t('hero.cta')} onClick={() => navigate('/enroll')} />
+                <Link to="/philosophy" className="w-full sm:w-auto text-center px-12 py-6 rounded-[2.5rem] font-bold text-xl text-slate-600 border-2 border-slate-100 bg-white/50 backdrop-blur hover:bg-white transition-all shadow-sm">
                   {t('hero.vision')}
                 </Link>
               </div>
@@ -126,11 +126,9 @@ const Home: React.FC = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.2 }}
             >
-              {/* Premium Mascot Illustration (Official Reference Style) */}
               <div className="relative z-20 flex justify-center items-center py-20">
-                <PIXOMascot size="xl" pose="learning" />
+                <PIXOMascot size="xl" pose="standing" />
                 
-                {/* Floating Micro-UI elements */}
                 <m.div 
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity }}
@@ -160,7 +158,6 @@ const Home: React.FC = () => {
                 </m.div>
               </div>
 
-              {/* Decorative Rings */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] -z-10 opacity-30">
                  <div className="w-full h-full border border-slate-200 rounded-full animate-spin-slow" />
               </div>
@@ -179,9 +176,30 @@ const Home: React.FC = () => {
           
           <div className="grid md:grid-cols-3 gap-10">
             {[
-              { color: 'rose', title: t('philosophy.energy'), icon: <Zap />, desc: t('philosophy.energyDesc') },
-              { color: 'amber', title: t('philosophy.learn'), icon: <Star />, desc: t('philosophy.learnDesc') },
-              { color: 'emerald', title: t('philosophy.grow'), icon: <ShieldCheck />, desc: t('philosophy.growDesc') }
+              { 
+                bgColor: 'bg-red-50', 
+                textColor: 'text-red-500', 
+                title: t('philosophy.energy'), 
+                icon: <Zap className="text-red-500" />, 
+                desc: t('philosophy.energyDesc'),
+                pose: 'hero' as const
+              },
+              { 
+                bgColor: 'bg-yellow-50', 
+                textColor: 'text-yellow-500', 
+                title: t('philosophy.learn'), 
+                icon: <Star className="text-yellow-500" />, 
+                desc: t('philosophy.learnDesc'),
+                pose: 'learning' as const
+              },
+              { 
+                bgColor: 'bg-green-50', 
+                textColor: 'text-green-600', 
+                title: t('philosophy.grow'), 
+                icon: <ShieldCheck className="text-green-600" />, 
+                desc: t('philosophy.growDesc'),
+                pose: 'growth' as const
+              }
             ].map((item, i) => (
               <m.div
                 key={i}
@@ -192,10 +210,13 @@ const Home: React.FC = () => {
                 className="group relative"
               >
                 <div className="relative bg-white/80 backdrop-blur-md p-12 rounded-[3.5rem] border border-slate-100 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 text-center overflow-hidden">
-                  <div className={`w-20 h-20 mx-auto rounded-3xl bg-${item.color}-50 text-${item.color}-500 flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform`}>
-                    {React.cloneElement(item.icon as React.ReactElement<{ size?: number }>, { size: 32 })}
+                  <div className="mb-8 flex justify-center">
+                    <PIXOMascot size="md" pose={item.pose} />
                   </div>
-                  <h3 className={`text-2xl font-black mb-4 text-${item.color}-600 uppercase tracking-widest`}>{item.title}</h3>
+                  <div className={`w-16 h-16 mx-auto rounded-2xl ${item.bgColor} flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform`}>
+                    {React.cloneElement(item.icon as React.ReactElement<{ size?: number }>, { size: 28 })}
+                  </div>
+                  <h3 className={`text-2xl font-black mb-4 ${item.textColor} uppercase tracking-[0.2em]`}>{item.title}</h3>
                   <p className="text-slate-500 font-medium leading-relaxed">{item.desc}</p>
                 </div>
               </m.div>
