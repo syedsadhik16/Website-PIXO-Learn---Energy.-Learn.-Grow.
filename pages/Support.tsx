@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 // Fix: cast motion to any to resolve property type mismatch errors
 const m = motion as any;
 import { Mail, MessageCircle, Phone, Send } from 'lucide-react';
-import PIXOMascot from '../components/PIXOMascot';
+import Mascot from '../components/Mascot';
 import ActionButton from '../components/ActionButton';
 import { useLanguage } from '../translations';
 
@@ -50,7 +50,7 @@ const Support: React.FC = () => {
             </div>
 
             <div className="mt-12 flex justify-center md:justify-start">
-               <PIXOMascot size="md" pose="thinking" />
+               <Mascot size="md" pose="thinking" />
             </div>
           </m.div>
 

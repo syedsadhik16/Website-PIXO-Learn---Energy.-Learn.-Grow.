@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 const m = motion as any;
-import PIXOMascot from '../components/PIXOMascot';
+import Mascot from '../components/Mascot';
 import { ArrowRight, Zap, CheckCircle2 } from 'lucide-react';
 
 const Join: React.FC = () => {
@@ -58,7 +58,7 @@ const Join: React.FC = () => {
             className="relative flex justify-center"
           >
             <div className="relative z-10">
-              <PIXOMascot pose="celebrating" size="xl" />
+              <Mascot pose="celebrating" size="xl" />
             </div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] -z-10 bg-emerald-50 blur-[120px] rounded-full" />
           </m.div>

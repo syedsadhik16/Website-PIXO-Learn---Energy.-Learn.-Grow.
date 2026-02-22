@@ -5,7 +5,7 @@ const m = motion as any;
 import { ArrowRight, Star, ShieldCheck, Heart, Zap } from 'lucide-react';
 import * as ReactRouterDOM from 'react-router-dom';
 const { Link, useNavigate } = ReactRouterDOM as any;
-import PIXOMascot from '../components/PIXOMascot';
+import Mascot from '../components/Mascot';
 import ActionButton from '../components/ActionButton';
 import { useLanguage } from '../translations';
 
@@ -127,7 +127,7 @@ const Home: React.FC = () => {
               transition={{ duration: 1.2, delay: 0.2 }}
             >
               <div className="relative z-20 flex justify-center items-center py-20">
-                <PIXOMascot size="xl" pose="standing" />
+                <Mascot size="xl" pose="standing" />
                 
                 <m.div 
                   animate={{ y: [0, -10, 0] }}
@@ -211,7 +211,7 @@ const Home: React.FC = () => {
               >
                 <div className="relative bg-white/80 backdrop-blur-md p-12 rounded-[3.5rem] border border-slate-100 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 text-center overflow-hidden">
                   <div className="mb-8 flex justify-center">
-                    <PIXOMascot size="md" pose={item.pose} />
+                    <Mascot size="md" pose={item.pose} />
                   </div>
                   <div className={`w-16 h-16 mx-auto rounded-2xl ${item.bgColor} flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform`}>
                     {React.cloneElement(item.icon as React.ReactElement<{ size?: number }>, { size: 28 })}

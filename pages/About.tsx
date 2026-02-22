@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 // Fix: Use any-casting for motion to bypass property type errors
 const m = motion as any;
 import { Target, Eye, Users, Heart, Zap, ShieldCheck } from 'lucide-react';
-import PIXOMascot from '../components/PIXOMascot';
+import Mascot from '../components/Mascot';
 import ActionButton from '../components/ActionButton';
 import { useLanguage } from '../translations';
 
@@ -58,7 +58,7 @@ const About: React.FC = () => {
               transition={{ duration: 1.2, ease: "easeOut" }}
             >
               <div className="relative z-20">
-                <PIXOMascot size="lg" pose="thinking" />
+                <Mascot size="lg" pose="thinking" />
               </div>
               {/* Background Blobs */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] -z-10 bg-blue-100/30 blur-[100px] rounded-full animate-pulse" />

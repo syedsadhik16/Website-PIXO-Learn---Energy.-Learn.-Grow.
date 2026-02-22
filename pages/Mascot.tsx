@@ -2,13 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 // Fix: Use any-casting for motion to resolve property errors
 const m = motion as any;
-import PIXOMascot, { PIXOPose } from '../components/PIXOMascot';
+import MascotComponent from '../components/Mascot';
 import { useLanguage } from '../translations';
+import { useMascot } from '../contexts/MascotContext';
+import { MascotPose } from '../config/mascots';
 
-const Mascot: React.FC = () => {
+const MascotPage: React.FC = () => {
   const { t } = useLanguage();
+  const { currentMascot, setMascot, availableMascots } = useMascot();
 
-  const pixoUniverse: { title: string; description: string; pose: PIXOPose }[] = [
+  const pixoUniverse: { title: string; description: string; pose: MascotPose }[] = [
     { title: t('mascot.v1.title'), description: t('mascot.v1.desc'), pose: 'hero' },
     { title: t('mascot.v2.title'), description: t('mascot.v2.desc'), pose: 'thinking' },
     { title: t('mascot.v3.title'), description: t('mascot.v3.desc'), pose: 'learning' },
@@ -35,9 +38,25 @@ const Mascot: React.FC = () => {
               {t('mascot.title')} <br />
               <span className="text-rose-500">{t('mascot.guide')}</span>
             </h1>
-            <p className="text-xl text-slate-500 leading-relaxed font-light">
+            <p className="text-xl text-slate-500 leading-relaxed font-light mb-10">
               {t('mascot.desc')}
             </p>
+
+            <div className="flex flex-wrap gap-4">
+              {availableMascots.map((msc) => (
+                <button
+                  key={msc.id}
+                  onClick={() => setMascot(msc.id)}
+                  className={`px-6 py-3 rounded-2xl font-black text-sm transition-all ${
+                    currentMascot.id === msc.id 
+                      ? 'bg-slate-900 text-white shadow-xl scale-105' 
+                      : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                  }`}
+                >
+                  {msc.name}
+                </button>
+              ))}
+            </div>
           </m.div>
           <m.div 
             initial={{ opacity: 0, scale: 0.8 }}
@@ -45,12 +64,12 @@ const Mascot: React.FC = () => {
             className="relative"
           >
              <div className="absolute inset-0 bg-gradient-to-tr from-rose-500 via-amber-400 to-emerald-500 blur-[120px] opacity-20 -z-10 animate-pulse" />
-             <PIXOMascot size="xl" pose="standing" />
+             <MascotComponent size="xl" pose="standing" />
           </m.div>
         </div>
 
         <div className="text-center mb-24">
-          <h2 className="text-4xl md:text-5xl font-black mb-4 font-kids tracking-tight">The PIXO Universe</h2>
+          <h2 className="text-4xl md:text-5xl font-black mb-4 font-kids tracking-tight">The {currentMascot.name} Universe</h2>
           <div className="w-24 h-2 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 mx-auto rounded-full" />
         </div>
 
@@ -67,7 +86,7 @@ const Mascot: React.FC = () => {
               <div className="flex justify-center mb-10 relative">
                  <div className="absolute inset-0 bg-slate-100 rounded-[3rem] scale-90 -rotate-3 group-hover:rotate-3 transition-transform duration-500 opacity-50" />
                  <div className="relative z-10 p-6 transform group-hover:scale-110 transition-transform duration-500">
-                    <PIXOMascot size="md" pose={v.pose} />
+                    <MascotComponent size="md" pose={v.pose} />
                  </div>
               </div>
               <h3 className="text-2xl font-black mb-3 text-slate-900">{v.title}</h3>
@@ -80,4 +99,4 @@ const Mascot: React.FC = () => {
   );
 };
 
-export default Mascot;
+export default MascotPage;

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 // Fix: Bypass framer-motion property errors with any-casting
 const m = motion as any;
 import { Zap, BookOpen, TrendingUp } from 'lucide-react';
-import PIXOMascot from '../components/PIXOMascot';
+import Mascot from '../components/Mascot';
 import ActionButton from '../components/ActionButton';
 import { useLanguage } from '../translations';
 
@@ -201,7 +201,7 @@ const Philosophy: React.FC = () => {
                 className="flex-1 flex justify-center relative"
               >
                 <div className="relative z-20 hover:scale-105 transition-transform duration-500">
-                  <PIXOMascot pose={section.pose} size="lg" />
+                  <Mascot pose={section.pose} size="lg" />
                 </div>
                  
                  <m.div 

@@ -1,28 +1,29 @@
+
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// Fix: Use any-casted motion for bypassing property type errors
+import { useMascot } from '../contexts/MascotContext';
+import { MascotPose, MASCOTS } from '../config/mascots';
+
 const m = motion as any;
 
-export type PIXOPose = 
-  | 'standing' 
-  | 'thinking' 
-  | 'celebrating' 
-  | 'learning' 
-  | 'hero' 
-  | 'logic' 
-  | 'growth' 
-  | 'meditating' 
-  | 'tech';
-
-interface PIXOMascotProps {
-  pose?: PIXOPose;
+interface MascotProps {
+  pose?: MascotPose;
   size?: 'sm' | 'md' | 'lg' | 'xl';
+  mascotId?: string; // Optional override for specific contexts
+  className?: string;
 }
 
-const PIXOMascot: React.FC<PIXOMascotProps> = ({
+const Mascot: React.FC<MascotProps> = ({
   pose = 'standing',
   size = 'md',
+  mascotId,
+  className = '',
 }) => {
+  const { currentMascot: globalMascot } = useMascot();
+  
+  // Use provided mascotId or fallback to global mascot from context
+  const mascot = mascotId ? (MASCOTS[mascotId] || globalMascot) : globalMascot;
+
   const sizes = {
     sm: 'w-24 h-24',
     md: 'w-48 h-48',
@@ -85,38 +86,40 @@ const PIXOMascot: React.FC<PIXOMascotProps> = ({
     }
   };
 
+  const getGlowColor = () => {
+    if (pose === 'hero') return 'bg-red-400';
+    if (pose === 'learning') return 'bg-yellow-400';
+    if (pose === 'growth') return 'bg-green-400';
+    return mascot.glowColor;
+  };
+
   return (
     <m.div
-      className={`${sizes[size]} relative flex items-center justify-center`}
+      className={`${sizes[size]} relative flex items-center justify-center ${className}`}
       animate={getPoseAnimation()}
     >
-      {/* Background Glow based on pose */}
-      <div className={`absolute inset-0 blur-[90px] rounded-full opacity-20 ${
-        pose === 'hero' ? 'bg-red-400' :
-        pose === 'learning' ? 'bg-yellow-400' :
-        pose === 'growth' ? 'bg-green-400' :
-        'bg-blue-400'
-      }`} />
+      {/* Background Glow */}
+      <div className={`absolute inset-0 blur-[90px] rounded-full opacity-20 ${getGlowColor()}`} />
 
-      {/* Mascot Image - Path corresponds to the character variants from user images */}
+      {/* Mascot Image */}
       <m.img
-        src={`/mascot/${pose}.png`}
-        alt={`PIXO mascot ${pose}`}
+        src={`${mascot.basePath}/${pose}.png`}
+        alt={`${mascot.name} mascot ${pose}`}
         className="relative z-10 w-full h-full object-contain select-none pointer-events-none drop-shadow-2xl"
         draggable={false}
         onError={(e: any) => {
-          // Fallback to a placeholder if specific images are missing in the local directory
-          e.target.src = `https://api.dicebear.com/7.x/bottts-neutral/svg?seed=${pose}&backgroundColor=transparent`;
+          // Fallback to a placeholder if specific images are missing
+          e.target.src = `https://api.dicebear.com/7.x/bottts-neutral/svg?seed=${mascot.id}-${pose}&backgroundColor=transparent`;
         }}
       />
 
-      {/* Dynamic Pixel Particles */}
+      {/* Dynamic Particles */}
       <AnimatePresence>
         {[...Array(pose === 'celebrating' ? 12 : 6)].map((_, i) => (
           <m.span
             key={i}
             className={`absolute w-2 h-2 rounded-[2px] opacity-40 ${
-              ['bg-red-500', 'bg-yellow-500', 'bg-green-500', 'bg-blue-500'][i % 4]
+              mascot.particleColors[i % mascot.particleColors.length]
             }`}
             initial={{ opacity: 0, scale: 0 }}
             animate={{
@@ -138,4 +141,4 @@ const PIXOMascot: React.FC<PIXOMascotProps> = ({
   );
 };
 
-export default PIXOMascot;
+export default Mascot;

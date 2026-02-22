@@ -13,6 +13,7 @@ import Support from './pages/Support';
 import About from './pages/About';
 import Enrollment from './pages/Enrollment';
 import { LanguageProvider } from './translations';
+import { MascotProvider } from './contexts/MascotContext';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -25,26 +26,28 @@ const ScrollToTop = () => {
 const App: React.FC = () => {
   return (
     <LanguageProvider>
-      <HashRouter>
-        <ScrollToTop />
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-grow pt-20">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/philosophy" element={<Philosophy />} />
-              <Route path="/programs" element={<Programs />} />
-              <Route path="/mascot" element={<Mascot />} />
-              <Route path="/parents" element={<Parents />} />
-              <Route path="/support" element={<Support />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/enroll" element={<Enrollment />} />
-              <Route path="/join" element={<Enrollment />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </HashRouter>
+      <MascotProvider>
+        <HashRouter>
+          <ScrollToTop />
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <main className="flex-grow pt-20">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/philosophy" element={<Philosophy />} />
+                <Route path="/programs" element={<Programs />} />
+                <Route path="/mascot" element={<Mascot />} />
+                <Route path="/parents" element={<Parents />} />
+                <Route path="/support" element={<Support />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/enroll" element={<Enrollment />} />
+                <Route path="/join" element={<Enrollment />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </HashRouter>
+      </MascotProvider>
     </LanguageProvider>
   );
 };
