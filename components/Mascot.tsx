@@ -32,58 +32,8 @@ const Mascot: React.FC<MascotProps> = ({
   };
 
   const getPoseAnimation = () => {
-    switch (pose) {
-      case 'thinking':
-        return { 
-          rotate: [0, -3, 3, 0], 
-          y: [0, -5, 0],
-          transition: { duration: 4, repeat: Infinity, ease: 'easeInOut' } 
-        };
-      case 'celebrating':
-        return { 
-          y: [0, -40, 0], 
-          scale: [1, 1.15, 1],
-          transition: { duration: 0.8, repeat: Infinity, ease: 'easeOut' }
-        };
-      case 'learning':
-        return { 
-          rotate: [-1, 1, -1],
-          y: [0, -2, 0],
-          transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
-        };
-      case 'hero':
-        return { 
-          scale: [1, 1.08, 1], 
-          y: [0, -12, 0],
-          filter: ['brightness(1)', 'brightness(1.2)', 'brightness(1)'],
-          transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
-        };
-      case 'logic':
-        return {
-          x: [-5, 5, -5],
-          transition: { duration: 5, repeat: Infinity, ease: 'easeInOut' }
-        };
-      case 'growth':
-        return {
-          scale: [1, 1.05, 1],
-          transition: { duration: 4, repeat: Infinity, ease: 'easeInOut' }
-        };
-      case 'meditating':
-        return {
-          y: [0, -15, 0],
-          transition: { duration: 6, repeat: Infinity, ease: 'easeInOut' }
-        };
-      case 'tech':
-        return {
-          scale: [1, 1.02, 1],
-          transition: { duration: 1, repeat: Infinity }
-        };
-      default:
-        return { 
-          y: [0, -8, 0],
-          transition: { duration: 4, repeat: Infinity, ease: 'easeInOut' }
-        };
-    }
+    const animation = mascot.animations[pose] || mascot.animations['standing'] || { animate: {}, transition: {} };
+    return animation;
   };
 
   const getGlowColor = () => {
@@ -93,10 +43,13 @@ const Mascot: React.FC<MascotProps> = ({
     return mascot.glowColor;
   };
 
+  const animation = getPoseAnimation();
+
   return (
     <m.div
       className={`${sizes[size]} relative flex items-center justify-center ${className}`}
-      animate={getPoseAnimation()}
+      animate={animation.animate}
+      transition={animation.transition}
     >
       {/* Background Glow */}
       <div className={`absolute inset-0 blur-[90px] rounded-full opacity-20 ${getGlowColor()}`} />
@@ -109,7 +62,7 @@ const Mascot: React.FC<MascotProps> = ({
         draggable={false}
         onError={(e: any) => {
           // Fallback to a placeholder if specific images are missing
-          e.target.src = `https://api.dicebear.com/7.x/bottts-neutral/svg?seed=${mascot.id}-${pose}&backgroundColor=transparent`;
+          e.target.src = `https://api.dicebear.com/7.x/bottts-neutral/svg?seed=${mascot.id}-${pose}&backgroundColor=transparent&eyes=happy&mouth=smile`;
         }}
       />
 

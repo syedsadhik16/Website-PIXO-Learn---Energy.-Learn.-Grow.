@@ -70,7 +70,35 @@ const MascotPage: React.FC = () => {
 
         <div className="text-center mb-24">
           <h2 className="text-4xl md:text-5xl font-black mb-4 font-kids tracking-tight">The {currentMascot.name} Universe</h2>
-          <div className="w-24 h-2 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 mx-auto rounded-full" />
+          <div className="w-24 h-2 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 mx-auto rounded-full mb-12" />
+          
+          <div className="max-w-5xl mx-auto rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white glass p-4 mb-12">
+            <img 
+              src="https://storage.googleapis.com/aistudio-assets/pixo-learn/pixel_mascot_sheet_1.png" 
+              alt="Pixel Mascot Sheet 1" 
+              className="w-full h-auto rounded-2xl"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-24">
+            <div className="rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white glass p-4">
+              <img 
+                src="https://storage.googleapis.com/aistudio-assets/pixo-learn/pixel_mascot_sheet_2.png" 
+                alt="Pixel Mascot Sheet 2" 
+                className="w-full h-auto rounded-2xl"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <div className="rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white glass p-4">
+              <img 
+                src="https://storage.googleapis.com/aistudio-assets/pixo-learn/pixel_mascot_sheet_3.png" 
+                alt="Pixel Mascot Sheet 3" 
+                className="w-full h-auto rounded-2xl"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-24">

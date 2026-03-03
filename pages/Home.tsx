@@ -126,13 +126,27 @@ const Home: React.FC = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.2 }}
             >
-              <div className="relative z-20 flex justify-center items-center py-20">
-                <Mascot size="xl" pose="standing" />
+              <div className="relative z-20 flex justify-center items-center py-10">
+                <div className="relative w-full aspect-video rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white/50 glass group">
+                  <video 
+                    autoPlay 
+                    muted 
+                    loop 
+                    playsInline
+                    className="w-full h-full object-cover"
+                  >
+                    <source src="https://storage.googleapis.com/aistudio-assets/pixo-learn/learning_companion.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                    <p className="text-white font-bold text-lg">Experience the PIXO Magic</p>
+                  </div>
+                </div>
                 
                 <m.div 
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity }}
-                  className="absolute top-10 -right-8 glass p-4 rounded-2xl border border-white/50 shadow-xl z-30 flex items-center gap-3"
+                  className="absolute -top-6 -right-8 glass p-4 rounded-2xl border border-white/50 shadow-xl z-30 flex items-center gap-3"
                 >
                   <div className="w-10 h-10 bg-rose-500 rounded-lg flex items-center justify-center text-white">
                     <Zap size={20} fill="currentColor" />
@@ -146,7 +160,7 @@ const Home: React.FC = () => {
                 <m.div 
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-                  className="absolute bottom-10 -left-8 glass p-4 rounded-2xl border border-white/50 shadow-xl z-30 flex items-center gap-3"
+                  className="absolute -bottom-6 -left-8 glass p-4 rounded-2xl border border-white/50 shadow-xl z-30 flex items-center gap-3"
                 >
                   <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center text-white">
                     <Heart size={20} fill="currentColor" />
